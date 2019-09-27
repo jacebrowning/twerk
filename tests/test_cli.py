@@ -15,7 +15,7 @@ def runner():
 def describe_cli():
     def describe_help():
         def placeholder(runner):
-            result = runner.invoke(main, ['--help'])
+            result = runner.invoke(main, ["--help"])
 
             expect(result.exit_code) == 0
             expect(result.output).contains("Show this message and exit.")

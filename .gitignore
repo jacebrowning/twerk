@@ -48,3 +48,6 @@ Icon*
 
 # Selenium
 geckodriver.log
+
+# User Data
+/data/accounts/

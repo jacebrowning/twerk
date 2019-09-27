@@ -27,6 +27,10 @@ watch: install .clean-test ## Continuously run all CI tasks when files chanage
 run: install
 	poetry run python $(PACKAGE)/__main__.py
 
+.PHONY: playground
+playground: install
+	poetry run jupyter notebook --notebook-dir=notebooks --browser=safari
+
 # SYSTEM DEPENDENCIES #########################################################
 
 .PHONY: doctor
@@ -58,6 +62,7 @@ poetry.lock: pyproject.toml
 format: install
 	poetry run isort $(PACKAGES) --recursive --apply
 	poetry run black $(PACKAGES)
+	poetry run nbstripout notebooks/*.ipynb
 	@ echo
 
 .PHONY: check

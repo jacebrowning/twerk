@@ -7,7 +7,7 @@ from splinter import Browser
 
 
 class View(ABC):
-    def __init__(self, browser: Browser, *username: str, goto: bool = True):
+    def __init__(self, browser: Browser, *, username: str, goto: bool = True):
         self._browser = browser
         self.username = username
 
@@ -16,8 +16,12 @@ class View(ABC):
 
         if goto:
             self._goto()
+            return
 
-        raise RuntimeError(f'Expected {self} to already be active')
+        raise RuntimeError(f"Expected {self} to already be active")
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}(username={self.username!r})"
 
     @property
     def _url(self) -> str:
@@ -39,7 +43,7 @@ class Profile(View):
 
     @property
     def tweets(self) -> int:
-        match = re.search(r'([\d.]+)(K?) Tweets', self._browser.html)
+        match = re.search(r"([\d.]+)(K?) Tweets", self._browser.html)
         assert match
         count = float(match.group(1))
         if match.group(2):
@@ -48,7 +52,7 @@ class Profile(View):
 
     def more(self) -> ProfileMore:
         self._browser.find_by_css('[aria-label="More"]').click()
-        return ProfileMore(self.username, self._browser)
+        return ProfileMore(self._browser, username=self.username, goto=False)
 
 
 class ProfileMore(View):
@@ -59,11 +63,11 @@ class ProfileMore(View):
         )
 
     def _goto(self) -> ProfileMore:
-        return Profile(self.username, self._browser).more()
+        return Profile(self._browser, username=self.username).more()
 
     def block(self) -> ProfileBlock:
         self._browser.find_by_text(f"Block @{self.username}").click()
-        return ProfileBlock(self.username, self._browser)
+        return ProfileBlock(self._browser, username=self.username, goto=False)
 
 
 class ProfileBlock(View):
@@ -74,12 +78,12 @@ class ProfileBlock(View):
         )
 
     def _goto(self) -> ProfileBlock:
-        return ProfileMore(self.username, self._browser).block()
+        return ProfileMore(self._browser, username=self.username).block()
 
     def cancel(self):
         self._browser.find_by_text("Cancel").click()
-        return Profile(self.username, self._browser)
+        return Profile(self._browser, username=self.username, goto=False)
 
     def block(self):
         self._browser.find_by_text("Block").click()
-        return Profile(self.username, self._browser)
+        return Profile(self._browser, username=self.username, goto=False)
