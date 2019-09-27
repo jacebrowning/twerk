@@ -1,6 +1,6 @@
-# Overview
+# Twerk
 
-Sample project generated from Jace's Python Template.
+This is a Selenium-powered tool to browser Twitter and automatically block fake accounts.
 
 This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
@@ -15,28 +15,16 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 
 ## Requirements
 
-* Python drwxr-xr-x    11 Browning  staff   352B Oct  5  2018 strappydoo.7+
-
-## Installation
-
-Install this library directly into an activated virtual environment:
-
-```text
-$ pip install twerk
-```
-
-or add it to your [Poetry](https://poetry.eustace.io/) project:
-
-```text
-$ poetry add twerk
-```
+* Python 3.7+
+* Poetry
 
 # Usage
 
-After installation, the package can imported:
+To run this program from source:
 
 ```text
-$ python
->>> import twerk
->>> twerk.__version__
+$ git clone https://github.com/jacebrowning/twerk
+$ cd twerk
+$ poetry install
+$ poetry run twerk
 ```
