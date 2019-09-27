@@ -39,7 +39,7 @@ minilog = "^1.2.4"
 splinter = "^0.11.0"
 
 # Data persistence
-datafiles = "^0.4.1"
+datafiles = "^0.4.2"
 
 [tool.poetry.dev-dependencies]
 

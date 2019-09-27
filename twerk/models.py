@@ -1,11 +1,23 @@
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Optional
 
 import log
-from datafiles import datafile
+from datafiles import converters, datafile
 from splinter import Browser
 from splinter.exceptions import ElementDoesNotExist
+
+
+class MonthYear(converters.Converter, datetime):
+    # pylint: disable=arguments-differ,unused-argument
+    @classmethod
+    def to_preserialization_data(cls, python_value, **kwargs):
+        return python_value.strftime("%B %Y")
+
+    @classmethod
+    def to_python_value(cls, deserialized_data, **kwargs):
+        return datetime.strptime(deserialized_data, "%B %Y")
 
 
 @datafile("../data/accounts/{self.username}.yml")
@@ -45,3 +57,12 @@ class Account:
         assert account, f"Failed to login to account: {username}"
 
         return account
+
+
+@datafile("../data/bots/{self.username}.yml", manual=True, defaults=True)
+class Bot:
+    username: str
+    tweets: int = 0
+    following: int = 0
+    followers: int = 0
+    joined: MonthYear = MonthYear(year=2006, month=3, day=21)
