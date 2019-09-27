@@ -1,6 +1,6 @@
 # Twerk
 
-This is a Selenium-powered tool to browser Twitter and automatically block fake accounts.
+This is a Selenium-powered tool to browse Twitter and automatically block fake accounts.
 
 This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
