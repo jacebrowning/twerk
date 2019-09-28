@@ -28,3 +28,9 @@ $ cd twerk
 $ poetry install
 $ poetry run twerk
 ```
+
+# Configuration
+
+The `$TWITTER_USERNAME` and `$TWITTER_PASSWORD` environment variables can be set to avoid manually typing account credentials.
+
+The `$TWITTER_SEED_USERNAME` can be set to override the default starting account when searching for fake accounts.

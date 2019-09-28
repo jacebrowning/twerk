@@ -23,12 +23,12 @@ ci: format check test mkdocs ## Run all tasks that determine CI status
 watch: install .clean-test ## Continuously run all CI tasks when files chanage
 	poetry run sniffer
 
-.PHONY: run ## Start the program
-run: install
-	poetry run python $(PACKAGE)/__main__.py
+.PHONY: run-cli
+run-cli: install
+	poetry run twerk --debug
 
-.PHONY: playground
-playground: install
+.PHONY: run-notebook
+run-notebook: install
 	poetry run jupyter notebook --notebook-dir=notebooks --browser=safari
 
 # SYSTEM DEPENDENCIES #########################################################
