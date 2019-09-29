@@ -1,20 +1,34 @@
 # pylint: disable=unused-argument,unused-variable,expression-not-assigned,no-member
 
+import pytest
 
-from dataclasses import asdict
-from datetime import datetime
+from ..models import Account, Credentials
 
-from ..models import Account
+
+def describe_credentials():
+    @pytest.fixture
+    def credendials():
+        return Credentials("username", "password")
+
+    def describe_repr():
+        def it_hides_password(expect, credendials):
+            expect(
+                repr(credendials)
+            ) == "Credentials(username='username', password=▒▒▒▒▒▒▒▒)"
+
+    def describe_str():
+        def it_includes_username(expect, credendials):
+            expect(str(credendials)) == "@username"
 
 
 def describe_account():
     def describe_init():
         def it_defaults_to_now_for_joined(expect):
             account = Account("foobar")
-            expect(asdict(account)) == {
-                "username": "foobar",
+            expect(account.datafile.data) == {
                 "tweets": 0,
                 "following": 0,
                 "followers": 0,
-                "joined": datetime(2006, 3, 21, 0, 0),
+                "likes": 0,
+                "joined": "March 2006",
             }

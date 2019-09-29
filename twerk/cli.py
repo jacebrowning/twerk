@@ -5,9 +5,9 @@ import ipdb
 import log
 from splinter import Browser
 
-from .models import Account
+from .models import Account, Credentials
 from .utils import get_browser
-from .views import Profile
+from .views.private import Profile
 
 
 @click.command(context_settings={"help_option_names": ["-h", "--help"]})
@@ -32,7 +32,7 @@ def main(username: str = "", password: str = "", debug: bool = False):
     with get_browser() as browser:
         try:
             run(browser, username, password)
-        except AttributeError as e:
+        except Exception as e:  # pylint: disable=broad-except
             if debug:
                 log.exception(e)
                 ipdb.post_mortem()
@@ -41,9 +41,9 @@ def main(username: str = "", password: str = "", debug: bool = False):
 
 
 def run(browser: Browser, username: str = "", password: str = ""):
-    account = Account.from_credentials(browser, username, password)
-    profile = Profile(browser, username=account.username)
-    account.tweets = profile.tweets
+    credentials = Credentials(username, password)
+    profile = Profile(browser, username=username, credentials=credentials)
+    account = Account(username, tweets=profile.tweets)
     click.echo(f"{account} has tweeted {account.tweets} times")
 
 
