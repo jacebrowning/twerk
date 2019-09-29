@@ -1,16 +1,20 @@
 # pylint: disable=unused-argument,unused-variable,expression-not-assigned,no-member
 
 
-from ..models import Bot
+from dataclasses import asdict
+from datetime import datetime
+
+from ..models import Account
 
 
-def describe_bot():
+def describe_account():
     def describe_init():
         def it_defaults_to_now_for_joined(expect):
-            bot = Bot("foobar")
-            expect(bot.datafile.data) == {
+            account = Account("foobar")
+            expect(asdict(account)) == {
+                "username": "foobar",
                 "tweets": 0,
                 "following": 0,
                 "followers": 0,
-                "joined": "March 2006",
+                "joined": datetime(2006, 3, 21, 0, 0),
             }
