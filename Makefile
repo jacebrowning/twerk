@@ -17,7 +17,7 @@ VIRTUAL_ENV ?= .venv
 all: install
 
 .PHONY: ci
-ci: format check test mkdocs ## Run all tasks that determine CI status
+ci: nbstripout format check test mkdocs ## Run all tasks that determine CI status
 
 .PHONY: watch
 watch: install .clean-test ## Continuously run all CI tasks when files chanage
@@ -28,7 +28,8 @@ run: run-cli
 
 .PHONY: run-cli
 run-cli: install
-	poetry run twerk --debug
+	poetry run twerk check --debug
+	poetry run twerk crawl
 
 .PHONY: run-notebook
 run-notebook: install
@@ -61,11 +62,17 @@ poetry.lock: pyproject.toml
 
 # CHECKS ######################################################################
 
+.PHONY: nbstripout
+nbstripout:
+	poetry run nbstripout notebooks/*.ipynb
+ifdef CI
+	git diff --exit-code
+endif
+
 .PHONY: format
 format: install
 	poetry run isort $(PACKAGES) --recursive --apply
 	poetry run black $(PACKAGES)
-	poetry run nbstripout notebooks/*.ipynb
 	@ echo
 
 .PHONY: check

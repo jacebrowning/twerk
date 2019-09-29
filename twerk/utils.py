@@ -1,18 +1,19 @@
 import os
 from getpass import getpass
-from typing import Tuple
 
 from splinter import Browser
+
+from .models import Credentials
 
 
 def get_browser() -> Browser:
     return Browser(wait_time=1.0)
 
 
-def get_credentials() -> Tuple[str, str]:
+def get_credentials() -> Credentials:
     username = os.getenv("TWITTER_USERNAME") or input("Twitter username: ")
     password = os.getenv("TWITTER_PASSWORD") or getpass("Twitter password: ")
-    return username, password
+    return Credentials(username, password)
 
 
 def get_seed_username() -> str:
