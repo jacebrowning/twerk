@@ -1,12 +1,14 @@
 from __future__ import annotations
 
+import time
 from datetime import datetime
 from typing import Optional
 
 import log
-from datafiles import converters, datafile
 from splinter import Browser
 from splinter.exceptions import ElementDoesNotExist
+
+from datafiles import converters, datafile
 
 
 class MonthYear(converters.Converter, datetime):
@@ -46,8 +48,13 @@ class Account:
     ) -> Account:
         browser.visit("https://twitter.com/home")
 
-        browser.find_by_css(".js-username-field").fill(username)
-        browser.find_by_css(".js-password-field").fill(password)
+        log.debug(f"Filling username: {username}")
+        browser.find_by_css(".js-username-field").first.fill(username)
+
+        time.sleep(0.5)
+
+        log.debug(f"Filling password: {'*' * len(password)}")
+        browser.find_by_css(".js-password-field").first.fill(password)
 
         browser.find_by_text("Log in").last.click()
 
@@ -59,7 +66,7 @@ class Account:
         return account
 
 
-@datafile("../data/bots/{self.username}.yml", manual=True, defaults=True)
+@datafile("../data/bots/{self.username}.yml", defaults=True)
 class Bot:
     username: str
     tweets: int = 0

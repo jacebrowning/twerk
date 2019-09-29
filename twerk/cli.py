@@ -6,6 +6,7 @@ import log
 from splinter import Browser
 
 from .models import Account
+from .utils import get_browser
 from .views import Profile
 
 
@@ -25,14 +26,15 @@ from .views import Profile
 )
 @click.option("--debug", is_flag=True)
 def main(username: str = "", password: str = "", debug: bool = False):
+    log.init(debug=debug)
     log.silence("datafiles")
 
-    with Browser() as browser:
+    with get_browser() as browser:
         try:
             run(browser, username, password)
         except AttributeError as e:
             if debug:
-                log.error(repr(e))
+                log.exception(e)
                 ipdb.post_mortem()
             else:
                 raise e from None

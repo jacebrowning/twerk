@@ -40,7 +40,7 @@ ipdb = "~0.12.2"  # export PYTHONBREAKPOINT=ipdb.set_trace
 splinter = "^0.11.0"
 
 # Data persistence
-datafiles = "^0.4.2"
+datafiles = "^0.5"
 
 [tool.poetry.dev-dependencies]
 

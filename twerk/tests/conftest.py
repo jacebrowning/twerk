@@ -2,6 +2,8 @@
 
 import log
 
+import datafiles
+
 
 def pytest_configure(config):
     """Disable verbose output when running tests."""
@@ -9,3 +11,8 @@ def pytest_configure(config):
 
     terminal = config.pluginmanager.getplugin("terminal")
     terminal.TerminalReporter.showfspath = False
+
+
+def pytest_runtest_setup(item):  # pylint: disable=unused-argument
+    """Disable file storage during unit tests."""
+    datafiles.settings.HOOKS_ENABLED = False

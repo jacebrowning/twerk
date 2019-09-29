@@ -23,6 +23,9 @@ ci: format check test mkdocs ## Run all tasks that determine CI status
 watch: install .clean-test ## Continuously run all CI tasks when files chanage
 	poetry run sniffer
 
+.PHONY: run
+run: run-cli
+
 .PHONY: run-cli
 run-cli: install
 	poetry run twerk --debug
