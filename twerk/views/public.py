@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import re
+from datetime import datetime
 
 import log
 from splinter import Browser
@@ -62,3 +63,8 @@ class Profile(Public):
         text = match.group(1)
         log.debug(f"Likes count: {text!r}")
         return int(text.replace(",", ""))
+
+    @property
+    def joined(self) -> datetime:
+        span = self._browser.find_by_css(".ProfileHeaderCard-joinDateText").first
+        return datetime.strptime(span["title"], "%I:%M %p - %d %b %Y")

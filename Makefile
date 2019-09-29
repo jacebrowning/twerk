@@ -28,7 +28,8 @@ run: run-cli
 
 .PHONY: run-cli
 run-cli: install
-	poetry run twerk --debug
+	poetry run twerk check --debug
+	poetry run twerk crawl
 
 .PHONY: run-notebook
 run-notebook: install
