@@ -69,7 +69,9 @@ class DateTimeConverter(converters.Converter):
     # pylint: disable=arguments-differ,unused-argument
     @classmethod
     def to_preserialization_data(cls, python_value, **kwargs):
-        return python_value.isoformat()
+        if isinstance(python_value, datetime):
+            return python_value.isoformat()
+        return python_value
 
     @classmethod
     def to_python_value(cls, deserialized_data, **kwargs):
