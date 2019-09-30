@@ -38,6 +38,7 @@ ipdb = "~0.12.2"  # export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Browser automation
 splinter = "^0.11.0"
+webdriver_manager = "^1.8.2"
 
 # Data persistence
 datafiles = "^0.5"
