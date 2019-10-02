@@ -34,3 +34,7 @@ $ poetry run twerk
 The `$TWITTER_USERNAME` and `$TWITTER_PASSWORD` environment variables can be set to avoid manually typing account credentials.
 
 The `$TWITTER_SEED_USERNAME` can be set to override the default starting account when searching for fake accounts.
+
+---
+
+> **Disclaimer**: I am by no means responsible for any usage of this tool. Please consult the [full license](https://github.com/jacebrowning/twerk/blob/master/LICENSE.md) for details.
