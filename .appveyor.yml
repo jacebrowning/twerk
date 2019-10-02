@@ -2,7 +2,7 @@ environment:
   global:
     RANDOM_SEED: 0
   matrix:
-    - PYTHON_MAJOR: drwxr-xr-x    11 Browning  staff   352B Oct  5  2018 strappydoo
+    - PYTHON_MAJOR: 3
       PYTHON_MINOR: 7
 
 cache:
