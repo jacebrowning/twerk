@@ -49,7 +49,7 @@ class Profile(Private):
             log.info(f"Assuming {self._credentials} is already logged in")
             return self
 
-        if not self._browser.is_text_present("Have an account?"):
+        if not self._browser.is_text_present("New to Twitter?"):
             log.info("Expanding login form")
             self._signin_link.first.click()
             time.sleep(0.5)
