@@ -7,7 +7,6 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 [![Unix Build Status](https://img.shields.io/travis/jacebrowning/twerk/master.svg?label=unix)](https://travis-ci.org/jacebrowning/twerk)
 [![Windows Build Status](https://img.shields.io/appveyor/ci/jacebrowning/twerk/master.svg?label=window)](https://ci.appveyor.com/project/jacebrowning/twerk)
 [![Coverage Status](https://img.shields.io/coveralls/jacebrowning/twerk/master.svg)](https://coveralls.io/r/jacebrowning/twerk)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/jacebrowning/twerk.svg)](https://scrutinizer-ci.com/g/jacebrowning/twerk/?branch=master)
 [![PyPI Version](https://img.shields.io/pypi/v/twerk.svg)](https://pypi.org/project/twerk)
 [![PyPI License](https://img.shields.io/pypi/l/twerk.svg)](https://pypi.org/project/twerk)
 
