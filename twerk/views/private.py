@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import time
+from datetime import datetime
 
 import log
 from splinter import Browser
@@ -11,6 +12,7 @@ from splinter.driver import ElementAPI
 
 from ..models import Credentials
 from .base import View
+from .mixins import ProfileMixin
 
 
 class Private(View):  # pylint: disable=abstract-method
@@ -35,7 +37,7 @@ class Private(View):  # pylint: disable=abstract-method
         return self._browser.find_by_id("signin-link")
 
 
-class Profile(Private):
+class Profile(ProfileMixin, Private):
     @property
     def _url(self) -> str:
         return f"https://twitter.com/{self.username}"
@@ -69,6 +71,29 @@ class Profile(Private):
         if match.group(2):
             count *= 1000
         return int(count)
+
+    @property
+    def following(self) -> int:
+        link = self._browser.find_link_by_href(f"/{self.username}/following").first
+        text = link["title"]
+        return int(text.replace(",", ""))
+
+    @property
+    def followers(self) -> int:
+        link = self._browser.find_link_by_href(f"/{self.username}/followers").first
+        text = link["title"]
+        return int(text.replace(",", ""))
+
+    @property
+    def likes(self) -> int:
+        log.critical("TODO: determine number of likes")
+        return 0
+
+    @property
+    def joined(self) -> datetime:
+        match = re.search(r"Joined ([A-Z][a-z]+ \d+)", self._browser.html)
+        assert match
+        return datetime.strptime(match.group(1), "%B %Y")
 
     def more(self) -> ProfileMore:
         self._browser.find_by_css('[aria-label="More"]').click()
