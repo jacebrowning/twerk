@@ -6,7 +6,7 @@ from splinter import Browser
 
 
 class View(ABC):
-    def __init__(self, browser: Browser, *, goto: bool = True, **kwargs):
+    def __init__(self, browser: Browser, *, goto: bool = True):
         self._browser = browser
 
         if self._active:

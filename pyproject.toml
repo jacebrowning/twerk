@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "twerk"
-version = "0.0"
+version = "0.0.1"
 description = "Make Twitter work for humans by blocking fake accounts."
 
 license = "MIT"
@@ -17,13 +17,19 @@ repository = "https://github.com/jacebrowning/twerk"
 keywords = [
 ]
 classifiers = [
-    # TODO: update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers
-    "Development Status :: 1 - Planning",
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Environment :: Web Environment",
+    "Framework :: Jupyter",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
-    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python",
+    "Topic :: Communications",
+    "Typing :: Typed",
 ]
 
 [tool.poetry.dependencies]
