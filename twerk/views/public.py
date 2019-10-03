@@ -9,6 +9,7 @@ import log
 from splinter import Browser
 
 from .base import View
+from .mixins import ProfileMixin
 
 
 class Public(View):  # pylint: disable=abstract-method
@@ -23,7 +24,7 @@ class Public(View):  # pylint: disable=abstract-method
         )
 
 
-class Profile(Public):
+class Profile(ProfileMixin, Public):
     @property
     def _url(self) -> str:
         return f"https://twitter.com/{self.username}"
