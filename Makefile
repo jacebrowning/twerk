@@ -49,7 +49,7 @@ DEPENDENCIES := $(VIRTUAL_ENV)/.poetry-$(shell bin/checksum pyproject.toml poetr
 install: $(DEPENDENCIES) .cache
 
 $(DEPENDENCIES): poetry.lock
-	@ poetry config virtualenvs.in-project true
+	@ poetry config virtualenvs.in-project true || poetry config settings.virtualenvs.in-project true
 	poetry install
 	@ touch $@
 
