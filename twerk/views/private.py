@@ -7,6 +7,7 @@ import time
 from datetime import datetime
 
 import log
+from selenium.common.exceptions import NoSuchFrameException
 from splinter import Browser
 from splinter.driver import ElementAPI
 
@@ -130,6 +131,15 @@ class ProfileMore(Private):
             goto=False,
         )
 
+    def report(self) -> ProfileReport:
+        self._browser.find_by_text(f"Report @{self.username}").click()
+        return ProfileReport(
+            self._browser,
+            username=self.username,
+            credentials=self._credentials,
+            goto=False,
+        )
+
 
 class ProfileBlock(Private):
     @property
@@ -147,7 +157,7 @@ class ProfileBlock(Private):
             self._browser, username=self.username, credentials=self._credentials
         ).block()
 
-    def cancel(self):
+    def cancel(self) -> Profile:
         self._browser.find_by_text("Cancel").click()
         return Profile(
             self._browser,
@@ -156,8 +166,38 @@ class ProfileBlock(Private):
             goto=False,
         )
 
-    def block(self):
+    def block(self) -> Profile:
         self._browser.find_by_text("Block").click()
+        return Profile(
+            self._browser,
+            username=self.username,
+            credentials=self._credentials,
+            goto=False,
+        )
+
+
+class ProfileReport(Private):
+    @property
+    def _url(self) -> str:
+        return NotImplemented
+
+    @property
+    def _active(self) -> bool:
+        try:
+            with self._browser.get_iframe(0) as iframe:
+                return iframe.is_text_present(
+                    "Help us understand the problem", wait_time=5
+                )
+        except NoSuchFrameException:
+            return False
+
+    def _goto(self) -> ProfileReport:
+        return ProfileMore(
+            self._browser, username=self.username, credentials=self._credentials
+        ).report()
+
+    def cancel(self) -> Profile:
+        self._browser.find_by_css('[aria-label="Back"]').click()
         return Profile(
             self._browser,
             username=self.username,
