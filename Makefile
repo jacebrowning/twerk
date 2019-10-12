@@ -23,16 +23,8 @@ ci: nbstripout format check test mkdocs ## Run all tasks that determine CI statu
 watch: install .clean-test ## Continuously run all CI tasks when files chanage
 	poetry run sniffer
 
-.PHONY: run
-run: run-cli
-
-.PHONY: run-cli
-run-cli: install
-	poetry run twerk check --debug
-	poetry run twerk crawl
-
-.PHONY: run-notebook
-run-notebook: install
+.PHONY: notebook
+notebook: install
 	poetry run jupyter notebook --notebook-dir=notebooks --browser=safari
 
 # SYSTEM DEPENDENCIES #########################################################

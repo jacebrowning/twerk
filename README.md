@@ -19,13 +19,18 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 
 # Usage
 
-To run this program from source:
+Install the project from source:
 
 ```text
 $ git clone https://github.com/jacebrowning/twerk
 $ cd twerk
 $ poetry install
-$ poetry run twerk
+```
+
+Verify browser automation is working:
+
+```
+$ poetry run twerk check --debug
 ```
 
 # Configuration
