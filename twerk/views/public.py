@@ -30,7 +30,14 @@ class Profile(ProfileMixin, Public):
         return f"https://twitter.com/{self.username}"
 
     def _goto(self) -> Profile:
+        if self._browser.is_element_visible_by_css('aria-label="Profile"'):
+            log.info("Logging out")
+            self._browser.visit("https://twitter.com/logout")
+            self._browser.find_by_text("Log out").click()
+
+        log.info(f"Visiting {self._url}")
         self._browser.visit(self._url)
+
         return self
 
     @property

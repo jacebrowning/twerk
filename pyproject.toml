@@ -67,6 +67,7 @@ pytest-describe = "*"
 pytest-expecter = "*"
 pytest-random = "*"
 freezegun = "*"
+flaky = "*"
 
 # Reports
 coveragespace = "*"

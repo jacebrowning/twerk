@@ -8,20 +8,26 @@ from webdriver_manager.firefox import GeckoDriverManager
 from .models import Credentials
 
 
-def get_browser() -> Browser:
+def get_browser(headless: bool = False) -> Browser:
+    log.silence("selenium", "urllib3")
+    options = dict(headless=headless, wait_time=1.0)
     try:
-        return Browser("firefox", wait_time=1.0)
+        return Browser("firefox", **options)
     except Exception as e:  # pylint: disable=broad-except
         log.debug(str(e))
         if "geckodriver" in str(e):
             path = GeckoDriverManager().install()
-            return Browser("firefox", wait_time=1.0, executable_path=path)
+            return Browser("firefox", executable_path=path, **options)
         raise e from None
 
 
-def get_credentials() -> Credentials:
-    username = os.getenv("TWITTER_USERNAME") or input("Twitter username: ")
-    password = os.getenv("TWITTER_PASSWORD") or getpass("Twitter password: ")
+def get_credentials(prompt: bool = True) -> Credentials:
+    username = os.getenv("TWITTER_USERNAME")
+    password = os.getenv("TWITTER_PASSWORD")
+    if not all((username, password)) and not prompt:
+        raise EnvironmentError("Twitter credentials not available")
+    username = username or input("Twitter username: ")
+    password = password or getpass("Twitter password: ")
     return Credentials(username, password)
 
 
