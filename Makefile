@@ -139,9 +139,10 @@ docs/requirements.txt: poetry.lock
 .PHONY: uml
 uml: install docs/*.png
 docs/*.png: $(MODULES)
-	poetry run pyreverse $(PACKAGE) -p $(PACKAGE) -a 1 -f ALL -o png --ignore tests
-	- mv -f classes_$(PACKAGE).png docs/classes.png
-	- mv -f packages_$(PACKAGE).png docs/packages.png
+	# TODO: AttributeError: 'Unknown' object has no attribute 'attrname'
+	# poetry run pyreverse $(PACKAGE) -p $(PACKAGE) -a 1 -f ALL -o png --ignore tests
+	# - mv -f classes_$(PACKAGE).png docs/classes.png
+	# - mv -f packages_$(PACKAGE).png docs/packages.png
 
 .PHONY: mkdocs-serve
 mkdocs-serve: mkdocs
