@@ -1,8 +1,10 @@
 import os
+import sys
 from getpass import getpass
 
 import log
 from splinter import Browser
+from splinter.exceptions import DriverNotFoundError
 from webdriver_manager import chrome, firefox
 
 from .models import Credentials
@@ -22,6 +24,8 @@ def get_browser(name: str = "", headless: bool = False) -> Browser:
 
     try:
         return Browser(name, **options) if name else Browser(**options)
+    except DriverNotFoundError:
+        sys.exit(f"Unsupported browser: {name}")
     except Exception as e:  # pylint: disable=broad-except
         log.debug(str(e))
 

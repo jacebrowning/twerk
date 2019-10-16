@@ -6,9 +6,9 @@ from twerk import utils
 from twerk.views import private, public
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def browser():
-    with utils.get_browser(headless=True) as browser:
+    with utils.get_browser("firefox", headless=True) as browser:
         yield browser
 
 
@@ -22,7 +22,7 @@ def credentials():
 
 def describe_public_views():
     def describe_profile():
-        @pytest.fixture(scope="module")
+        @pytest.fixture
         def profile(browser):
             return public.Profile(browser, username="jack")
 

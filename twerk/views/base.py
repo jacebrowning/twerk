@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod, abstractproperty
 
+import log
 from splinter import Browser
 
 
@@ -15,11 +16,13 @@ class View(ABC):
         if goto:
             self._goto()
         else:
+            log.debug(f"Current URL: {self._browser.url}")
             raise RuntimeError(f"Expected {self} to already be active")
 
         if self._active:
             return
 
+        log.debug(f"Current URL: {self._browser.url}")
         raise RuntimeError(f"Failed to navigate to {self}")
 
     def __repr__(self) -> str:
