@@ -3,21 +3,33 @@ from getpass import getpass
 
 import log
 from splinter import Browser
-from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager import chrome, firefox
 
 from .models import Credentials
 
 
-def get_browser(headless: bool = False) -> Browser:
+WEBDRIVER_MANAGERS = {
+    "chromedriver": chrome.ChromeDriverManager,
+    "geckodriver": firefox.GeckoDriverManager,
+}
+
+
+def get_browser(name: str = "", headless: bool = False) -> Browser:
     log.silence("selenium", "urllib3")
-    options = dict(headless=headless, wait_time=1.0)
+
+    name = name.lower()
+    options = {"headless": headless, "wait_time": 1.0}
+
     try:
-        return Browser("firefox", **options)
+        return Browser(name, **options) if name else Browser(**options)
     except Exception as e:  # pylint: disable=broad-except
         log.debug(str(e))
-        if "geckodriver" in str(e):
-            path = GeckoDriverManager().install()
-            return Browser("firefox", executable_path=path, **options)
+
+        for driver, manager in WEBDRIVER_MANAGERS.items():
+            if driver in str(e):
+                options["executable_path"] = manager().install()
+                return Browser(name, **options) if name else Browser(**options)
+
         raise e from None
 
 
