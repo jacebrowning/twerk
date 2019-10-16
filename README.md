@@ -14,8 +14,8 @@ This project was generated with [cookiecutter](https://github.com/audreyr/cookie
 
 ## Requirements
 
-* Python 3.7+
-* Poetry
+- Python 3.7+
+- Poetry
 
 # Usage
 
@@ -37,6 +37,8 @@ $ poetry run twerk check --debug --browser=firefox
 # Configuration
 
 The `$TWITTER_USERNAME` and `$TWITTER_PASSWORD` environment variables can be set to avoid manually typing account credentials.
+
+Most commands accept a `--browser` option or you can set `$BROWSER` to avoid specifying this each time.
 
 The `$TWITTER_SEED_USERNAME` can be set to override the default starting account when searching for fake accounts.
 

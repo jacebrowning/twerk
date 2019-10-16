@@ -1,5 +1,7 @@
 # pylint: disable=redefined-outer-name,unused-variable,expression-not-assigned
 
+import sys
+
 import pytest
 
 from twerk import utils
@@ -8,7 +10,7 @@ from twerk.views import private, public
 
 @pytest.fixture(scope="session")
 def browser():
-    with utils.get_browser("firefox", headless=True) as browser:
+    with utils.get_browser("firefox", headless="--pdb" not in sys.argv) as browser:
         yield browser
 
 

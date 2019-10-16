@@ -17,9 +17,7 @@ WEBDRIVER_MANAGERS = {
 
 
 def get_browser(name: str = "", headless: bool = False) -> Browser:
-    log.silence("selenium", "urllib3")
-
-    name = name.lower()
+    name = (name or os.getenv("BROWSER") or "").lower()
     options = {"headless": headless, "wait_time": 1.0}
 
     try:

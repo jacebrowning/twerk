@@ -10,7 +10,7 @@ from .utils import get_browser
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
 def main():
     log.init()
-    log.silence("datafiles")
+    log.silence("datafiles", "selenium", "urllib3")
 
 
 @main.command(help="Verify browser automation is working.")
