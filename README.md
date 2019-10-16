@@ -30,7 +30,8 @@ $ poetry install
 Verify browser automation is working:
 
 ```
-$ poetry run twerk check --debug
+$ poetry run twerk check --debug --browser=chrome
+$ poetry run twerk check --debug --browser=firefox
 ```
 
 # Configuration
