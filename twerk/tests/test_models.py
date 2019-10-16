@@ -51,7 +51,7 @@ def describe_account():
         @freeze_time("2019-09-29")
         def it_computes_tweet_rate(expect, account):
             expect(str(account)) == (
-                "@foobar is 4940 days, 0:00:00 old "
-                "and had tweeted 0 times at a rate of 0.0 tweets/hour "
-                "with 0 followers"
+                "@foobar is 13.52 years old "
+                "and has tweeted 0 times "
+                "at a rate of 0.0 tweets/hour with 0 followers"
             )

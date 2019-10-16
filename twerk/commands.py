@@ -7,8 +7,8 @@ from .views.public import Profile as PublicProfile
 
 def check(browser: Browser, username: str, *, display=print):
     profile = PublicProfile(browser, username=username)
-    account = Account(username, tweets=profile.tweets)
-    display(f"{account} has tweeted {account.tweets} times")
+    account = Account.from_profile(profile)
+    display(account)
 
 
 def crawl(browser: Browser, username: str):
@@ -22,4 +22,4 @@ def block(browser: Browser, username: str, password: str, *, display=print):
     credentials = Credentials(username, password)
     profile = PrivateProfile(browser, username=username, credentials=credentials)
     account = Account(username, tweets=profile.tweets)
-    display(f"{account} has tweeted {account.tweets} times")
+    display(account)

@@ -44,9 +44,10 @@ class Account:
 
     def __str__(self) -> str:
         return (
-            f"@{self.username} is {self.account_age} old"
-            f" and had tweeted {self.tweets} times"
-            f" at a rate of {self.tweets_per_hour} tweets/hour"
+            f"@{self.username}"
+            f" is {round(self.account_age_in_years, 2)} years old"
+            f" and has tweeted {self.tweets} times"
+            f" at a rate of {round(self.tweets_per_hour, 2)} tweets/hour"
             f" with {self.followers} followers"
         )
 
@@ -55,9 +56,16 @@ class Account:
         return datetime.now() - self.joined
 
     @property
+    def account_age_in_hours(self) -> float:
+        return self.account_age.total_seconds() / 3600
+
+    @property
+    def account_age_in_years(self) -> float:
+        return self.account_age_in_hours / 24 / 365.25
+
+    @property
     def tweets_per_hour(self) -> float:
-        account_age_in_hours = self.account_age.total_seconds() / 3600
-        return self.tweets / account_age_in_hours
+        return self.tweets / self.account_age_in_hours
 
 
 @datafile("../data/blocklist.json", defaults=True)

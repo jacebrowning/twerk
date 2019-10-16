@@ -43,34 +43,38 @@ class Profile(ProfileMixin, Public):
     @property
     def tweets(self) -> int:
         match = re.search(r"([\d,]+) Tweets", self._browser.html)
-        assert match
-        text = match.group(1)
-        log.debug(f"Tweets count: {text!r}")
-        return int(text.replace(",", ""))
+        if match:
+            text = match.group(1)
+            log.debug(f"Tweets count: {text!r}")
+            return int(text.replace(",", ""))
+        return 0
 
     @property
     def following(self) -> int:
         match = re.search(r"([\d,]+) Following", self._browser.html)
-        assert match
-        text = match.group(1)
-        log.debug(f"Following count: {text!r}")
-        return int(text.replace(",", ""))
+        if match:
+            text = match.group(1)
+            log.debug(f"Following count: {text!r}")
+            return int(text.replace(",", ""))
+        return 0
 
     @property
     def followers(self) -> int:
         match = re.search(r"([\d,]+) Followers", self._browser.html)
-        assert match
-        text = match.group(1)
-        log.debug(f"Followers count: {text!r}")
-        return int(text.replace(",", ""))
+        if match:
+            text = match.group(1)
+            log.debug(f"Followers count: {text!r}")
+            return int(text.replace(",", ""))
+        return 0
 
     @property
     def likes(self) -> int:
         match = re.search(r"([\d,]+) Likes", self._browser.html)
-        assert match
-        text = match.group(1)
-        log.debug(f"Likes count: {text!r}")
-        return int(text.replace(",", ""))
+        if match:
+            text = match.group(1)
+            log.debug(f"Likes count: {text!r}")
+            return int(text.replace(",", ""))
+        return 0
 
     @property
     def joined(self) -> datetime:
