@@ -39,7 +39,7 @@ python = "^3.7"
 # User interface
 bullet = "^2.1.0"
 click = "^7.0"
-minilog = "^1.2.4"
+minilog = "^1.2.5"
 ipdb = "~0.12.2"  # export PYTHONBREAKPOINT=ipdb.set_trace
 
 # Browser automation
