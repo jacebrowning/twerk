@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "twerk"
-version = "0.0.1"
+version = "0.0.2"
 description = "Make Twitter work for humans by blocking fake accounts."
 
 license = "MIT"
