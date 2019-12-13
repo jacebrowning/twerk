@@ -1,7 +1,7 @@
 [tool.poetry]
 
 name = "twerk"
-version = "0.0.2"
+version = "0.0.3"
 description = "Make Twitter work for humans by blocking fake accounts."
 
 license = "MIT"
@@ -56,7 +56,7 @@ black = "=19.3b0"
 isort = "=4.3.4"
 
 # Linters
-mypy = "*"
+mypy = "=0.740"
 pydocstyle = "*"
 pylint = "^2.0"
 
